@@ -233,6 +233,7 @@ jobs:
             cd backend
             sudo npm install
             sudo npm audit fix --audit-level=critical
+            sudo npm audit fix --audit-level=critical
             sudo npm run migrations > migrations_dump.txt
 
       - run:
