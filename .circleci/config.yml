@@ -226,6 +226,7 @@ jobs:
       - checkout
       - install_awscli
       - install_ansible
+      - install_nodejs
       - add_ssh_keys:
           fingerprints: ["5a:b3:c3:40:2f:0f:ea:fb:15:8f:e1:b5:87:30:02:73"]
       - attach_workspace:
@@ -252,6 +253,7 @@ jobs:
           name: Run migrations
           command: |
             cd ~/project/backend
+            npm install
             npm run migrations > migrations_log.txt
             cat ./migrations_log.txt
 
