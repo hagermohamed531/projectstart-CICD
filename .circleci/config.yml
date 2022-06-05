@@ -246,8 +246,15 @@ jobs:
           name: Run migrations
           command: |
             cd backend
+            echo $pwd
             npm install
+            echo "before fix"
+            npm audit fix --audit-level=critical
+            npm audit fix --audit-level=critical
+            npm audit --audit-level=critical
+            echo "after fix"
             npm run migrations > migrations_dump.txt
+
       - run:
           name: Send migration status to kvdb.io
           command: |
