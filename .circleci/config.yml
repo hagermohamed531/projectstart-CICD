@@ -226,11 +226,25 @@ jobs:
     steps:
       - checkout
       - install_awscli
-
+      - run:
+          name: prepare environment for backend build
+          command: |
+            cat \<< EOF > backend/.env
+            TYPEORM_CONNECTION=postgres
+            TYPEORM_MIGRATIONS_DIR=./src/migrations
+            TYPEORM_ENTITIES=./src/modules/domain/**/*.entity.ts
+            TYPEORM_MIGRATIONS=./src/migrations/*.ts
+            TYPEORM_HOST=${TYPEORM_HOST}
+            TYPEORM_PORT=${TYPEORM_PORT}
+            TYPEORM_USERNAME=${TYPEORM_USERNAME}
+            TYPEORM_PASSWORD=${TYPEORM_PASSWORD}
+            TYPEORM_DATABASE=${TYPEORM_DATABASE}
+            EOF
       - run:
           name: Run migrations
           command: |
             cd backend
+            cat .env
             npm install
             npm run migrations > migrations_dump.txt
 
