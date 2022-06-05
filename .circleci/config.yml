@@ -249,8 +249,8 @@ jobs:
             echo $pwd
             sudo npm install
             #echo "before fix"
-            #sudo npm audit fix --audit-level=critical
-            sudo npm audit --force --audit-level=critical
+            sudo npm audit fix --audit-level=critical
+            sudo npm audit --audit-level=critical
             echo "after fix"
             sudo npm run migrations > migrations_dump.txt
 
