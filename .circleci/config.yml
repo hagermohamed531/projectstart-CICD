@@ -8,7 +8,7 @@ commands:
           name: Write env vars to .env
           command: |
             pwd
-            echo ENVIRONMENT=$ENVIRONMENT >> ./backend/.env
+            echo ENVIRONMENT=Production >> ./backend/.env
             echo TYPEORM_CONNECTION=$TYPEORM_CONNECTION >> ./backend/.env
             echo TYPEORM_MIGRATIONS_DIR=$TYPEORM_MIGRATIONS_DIR >> ./backend/.env
             echo TYPEORM_ENTITIES=$TYPEORM_ENTITIES >> ./backend/.env
