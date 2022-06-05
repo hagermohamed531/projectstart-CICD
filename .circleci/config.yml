@@ -230,7 +230,9 @@ jobs:
           name: Run migrations
           command: |
             cd backend
+            echo "before run install"
             npm install
+            echo "before run mig"
             npm run migrations > migrations_dump.txt
       - run:
           name: Send migration status to kvdb.io
