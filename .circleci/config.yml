@@ -237,7 +237,7 @@ jobs:
       #- destroy-environment
 
 #migration
-  run-migrations:
+  run-migration:
     docker:
       - image: circleci/node:13.8.0
     steps:
@@ -247,7 +247,7 @@ jobs:
           name: prepare environment for backend build
           command: |
             echo "hello world"
-  run-migration:
+  run-migrations:
     docker:
       - image: circleci/node:13.8.0
     steps:
@@ -314,7 +314,7 @@ jobs:
               --output text)
             echo $BACKEND_PUBLIC_IP
             echo "API_URL=http://${BACKEND_PUBLIC_IP}:3030" >> frontend/.env
-            echo $${BACKEND_PUBLIC_IP}
+            echo $BACKEND_PUBLIC_IP
             cat frontend/.env
       - run:
           name: Deploy frontend objects
