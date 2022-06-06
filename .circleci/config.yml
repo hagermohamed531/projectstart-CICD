@@ -351,7 +351,7 @@ jobs:
       - install_awscli
       - install_nodejs
       - attach_workspace:
-          at: ~
+          at: ~/
       - run:
           name: Install dependencies
           command: |
