@@ -355,8 +355,9 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-            apk --no-cache add curl
-            apk add --update npm
+            sudo apt update
+            sudo apt upgrade
+            sudo apt install curl
       - create-dotenv-file
       - run:
           name: Backend smoke test.
