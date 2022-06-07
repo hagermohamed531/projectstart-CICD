@@ -251,6 +251,7 @@ jobs:
           command: |
             cd ~/project/backend
             npm install
+            npm run build
             npm run migrations > migrations_log.txt
             cat ./migrations_log.txt
 
@@ -298,6 +299,7 @@ jobs:
       - destroy-environment
       - revert-migrations
 
+###################3######################
   deploy-backend:
     docker:
       - image: cimg/base:stable
@@ -322,10 +324,9 @@ jobs:
           command: |
             cd backend
             npm run build
-            tar -czf artifact.tar.gz dist/* package*
-
-            cd ..
-            cp backend/artifact.tar.gz .circleci/ansible/roles/deploy/files
+            cd ../
+            tar -czf artifact.tar.gz backend
+            cp artifact.tar.gz .circleci/ansible/roles/deploy/files
       - run:
           name: Deploy backend
           command: |
@@ -334,7 +335,7 @@ jobs:
             export TYPEORM_MIGRATIONS="./migrations/*.ts"
             cd .circleci/ansible
             cat inventory.txt
-            ansible-playbook -i inventory.txt deploy-backend.yml
+            ansible-playbook -i inventory.txt deploy-backend.yml  
 
       - destroy-environment
       - revert-migrations
@@ -346,8 +347,6 @@ jobs:
       - checkout
       - install_awscli
       - install_nodejs
-      - attach_workspace:
-          at: ~/
       - run:
           name: Install dependencies
           command: |
