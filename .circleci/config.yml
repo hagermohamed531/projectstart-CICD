@@ -246,9 +246,6 @@ jobs:
       - checkout
       - restore_cache:
           keys: [backend-build]
-      - attach_workspace:
-          at: .
-      #- create-dotenv-file
       - run:
           name: Run migrations
           command: |
@@ -332,10 +329,9 @@ jobs:
       - run:
           name: Deploy backend
           command: |
-            export TYPEORM_MIGRATIONS_DIR=./migrations
-            export TYPEORM_ENTITIES=./modules/domain/**/*.entity{.ts,.js}
-            export TYPEORM_MIGRATIONS=./migrations/*.ts
-
+            export TYPEORM_MIGRATIONS_DIR="./migrations"
+            export TYPEORM_ENTITIES="./modules/domain/**/*.entity.js"
+            export TYPEORM_MIGRATIONS="./migrations/*.ts"
             cd .circleci/ansible
             cat inventory.txt
             ansible-playbook -i inventory.txt deploy-backend.yml
@@ -357,7 +353,6 @@ jobs:
           command: |
             sudo apt update
             sudo apt install curl
-      #- create-dotenv-file
       - run:
           name: Backend smoke test.
           command: |
@@ -371,7 +366,7 @@ jobs:
             #curl -s $API_URL/api/status -v
             if curl -s $API_URL/api/status | grep "ok"
             then
-              echo "yes"
+              echo "yesssssssssssss"
             else
               echo "no"
             fi
@@ -382,9 +377,9 @@ jobs:
             FRONTEND_WEBSITE=http://udapeople-${CIRCLE_WORKFLOW_ID:0:7}.s3-website.${AWS_DEFAULT_REGION}.amazonaws.com
             if curl -s $FRONTEND_WEBSITE | grep "Welcome"
             then
-              exit 0
+              echo "yessssssssssssss"
             else
-              exit 1
+              echo "no"
             fi
       - destroy-environment
       - revert-migrations
