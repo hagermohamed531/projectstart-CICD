@@ -213,12 +213,11 @@ jobs:
           at: ~/
       - run:
           name: print work dir
-          command: 
+          command: |
             cat inventory.txt
             pwd
             hostname 
             curl ifconfig.me
-            hostname -I
             ansible --version
       - run:
           name: Configure Server
