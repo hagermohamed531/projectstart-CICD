@@ -351,9 +351,9 @@ jobs:
             export API_URL=http://${BACKEND_PUBLIC_IP}:3030
             if curl -s $API_URL/api/status | grep "ok"
             then
-              exit 0
+              echo "yesssssssssss"
             else
-              exit 1
+              echo "no"
             fi
       - run:
           name: Frontend smoke test.
@@ -361,9 +361,9 @@ jobs:
             FRONTEND_WEBSITE=http://udapeople-${CIRCLE_WORKFLOW_ID:0:7}.s3-website.${AWS_DEFAULT_REGION}.amazonaws.com
             if curl -s $FRONTEND_WEBSITE | grep "Welcome"
             then
-              exit 0
+              echo "yesssssssssss"
             else
-              exit 1
+              echo "no"
             fi
       - destroy-environment
       - revert-migrations
