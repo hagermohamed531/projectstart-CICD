@@ -8,6 +8,12 @@
     become: yes
     apt:
       upgrade: yes
+  
+  - name: "download node.js"
+    become: true
+    shell: |
+      curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
+
 
   - name: "install nodejs and npm"
     become: yes
@@ -21,7 +27,6 @@
     npm:
       name: n
       global: yes
-      production: yes
 
   - name: "install nodejs 13.8.0"
     become: yes
@@ -32,8 +37,8 @@
     npm:
       name: pm2
       global: yes
-      production: yes
-      state: present
+
+
   - name: Creates directory
     file:
      path: ~/2_in_serverconf
