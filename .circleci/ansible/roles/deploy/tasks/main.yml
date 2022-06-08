@@ -4,6 +4,13 @@
   copy:
     src: artifact.tar.gz
     dest: /home/ubuntu/backend
+    
+ 
+----
+- name: "Creates backend app directory2"
+  file:
+    path: ~/backend
+    state: directory
 
 - name: "Unarchive backend files"
   become: true
@@ -30,4 +37,5 @@
     export TYPEORM_DATABASE="postgres"
     pm2 stop default
     pm2 start main.js
+
 
