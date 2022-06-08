@@ -215,11 +215,12 @@ jobs:
           name: print work dir
           command: |
             pwd
-            cat project/.circleci/ansible/inventory.txt
+            cd .circleci/ansible
             pwd
             hostname 
             curl ifconfig.me
             ansible --version
+            cat project/.circleci/ansible/inventory.txt
       - run:
           name: Configure Server
           command: |
