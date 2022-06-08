@@ -4,9 +4,7 @@
   copy:
     src: artifact.tar.gz
     dest: /home/ubuntu/backend
-    
- 
-----
+
 - name: "Creates backend app directory2"
   file:
     path: ~/backend
