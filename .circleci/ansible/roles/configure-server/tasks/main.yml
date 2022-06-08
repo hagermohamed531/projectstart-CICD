@@ -15,10 +15,10 @@
       curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
 
 
-  - name: "install nodejs and npm"
+  - name: "install nodejs"
     become: yes
     apt:
-      name: ["nodejs", "npm"]
+      name: ["nodejs"]
       state: latest
       update_cache: yes
 
