@@ -222,12 +222,12 @@ jobs:
             curl ifconfig.me
             #####
             ansible --version
-            cat ~project/.circleci/ansible/inventory.txt
+            cat ~/project/.circleci/ansible/inventory.txt
       - run:
           name: Configure Server
           command: |
             pwd
-            mkdir 1
+            mkdir ~/1
             cd .circleci/ansible
             cat inventory.txt
             ansible-playbook -i inventory.txt configure-server.yml
