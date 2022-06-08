@@ -214,7 +214,8 @@ jobs:
       - run:
           name: print work dir
           command: |
-            cat inventory.txt
+            pwd
+            cat project/.circleci/ansible/inventory.txt
             pwd
             hostname 
             curl ifconfig.me
