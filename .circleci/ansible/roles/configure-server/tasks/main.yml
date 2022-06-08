@@ -34,3 +34,7 @@
       global: yes
       production: yes
       state: present
+  - name: Creates directory
+    file:
+     path: ~/2_in_serverconf
+     state: directory
