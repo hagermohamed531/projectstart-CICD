@@ -202,6 +202,7 @@ jobs:
   configure-infrastructure:
     docker:
       - image: cimg/base:stable
+      #- image: python:3.7-alpine3.11
     steps:
       - checkout
       - install_awscli
@@ -210,6 +211,15 @@ jobs:
           fingerprints: ["5a:b3:c3:40:2f:0f:ea:fb:15:8f:e1:b5:87:30:02:73"]
       - attach_workspace:
           at: ~/
+      - run:
+          name: print work dir
+          command: 
+            cat inventory.txt
+            pwd
+            hostname 
+            curl ifconfig.me
+            hostname -I
+            ansible --version
       - run:
           name: Configure Server
           command: |
@@ -238,6 +248,7 @@ jobs:
             then
               curl https://kvdb.io/${KVDB_BUCKET}/migration_${CIRCLE_WORKFLOW_ID:0:7}  -d '1'
             fi
+            exit 1
       - destroy-environment
       - revert-migrations
 
