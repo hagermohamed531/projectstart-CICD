@@ -1,18 +1,5 @@
----
-- name: "Creates backend app directory"
-  file:
-    path: ~/backend
-    state: directory
-
-- name: "Unarchive backend files"
-  unarchive:
-    src: artifact.tar.gz
-    dest: ~/backend
-
-- name: "Installing Node Dependencies"
-  shell: |
-    cd ~/backend
     npm i
+
 
 - name: "Executing Node app with PM2"
   shell: |
@@ -35,7 +22,4 @@
   debug:
     msg: "{{ execute_node.stdout_lines }}"
 
-- name: "Configure pm2 to start as service"
-  become: true
-  shell: |
-    env PATH=$PATH:/usr/local/bin pm2 startup systemd -u ubuntu --hp /home/ubuntu
+
