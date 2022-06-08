@@ -3,18 +3,13 @@
   become: true
   copy:
     src: artifact.tar.gz
-    dest: /home/ubuntu/backend
-
-- name: "Creates backend app directory2"
-  file:
-    path: ~/backend
-    state: directory
+    dest: /home/ubuntu
 
 - name: "Unarchive backend files"
   become: true
   unarchive:
     src: artifact.tar.gz
-    dest: /home/ubuntu/backend
+    dest: /home/ubuntu
 
 - name: "Installing Node Dependencies"
   shell: |
