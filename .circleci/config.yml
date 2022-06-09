@@ -202,8 +202,8 @@ jobs:
 
   configure-infrastructure:
     docker:
-      - image: cimg/base:stable
-      #- image: python:3.7-alpine3.11
+      #- image: cimg/base:stable
+      - image: python:3.7-alpine3.11
     steps:
       - checkout
       - install_awscli
@@ -294,12 +294,11 @@ jobs:
 
   deploy-backend:
     docker:
-      - image: cimg/base:stable
+      - image: python:3.7-alpine3.11
     steps:
       - checkout
       - install_awscli
       - install_ansible
-      - install_nodejs
       - add_ssh_keys:
           fingerprints: ["5a:b3:c3:40:2f:0f:ea:fb:15:8f:e1:b5:87:30:02:73"]
       - attach_workspace:
