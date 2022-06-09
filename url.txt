@@ -1,0 +1,10 @@
+Github repo:
+https://github.com/hagermohamed531/projectstarter-CICD
+
+S3 URL:
+https://udapeople-fca3330.s3.us-east-1.amazonaws.com/
+
+cloudfront:
+https://d1ijuycdkgn1ie.cloudfront.net
+
+
