@@ -213,18 +213,6 @@ jobs:
       - attach_workspace:
           at: ~/
       - run:
-          name: print work dir
-          command: |
-            pwd
-            cd .circleci/ansible
-            pwd
-            hostname 
-            ########
-            curl ifconfig.me
-            #####
-            ansible --version
-            cat ~/project/.circleci/ansible/inventory.txt
-      - run:
           name: Configure Server
           command: |
             pwd
