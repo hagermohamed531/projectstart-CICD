@@ -308,9 +308,6 @@ jobs:
           name: Install dependencies
           command: |
             cd backend
-            apk add --update ansible curl rsync openssh nodejs npm
-            ansible --version
-            aws --version
 
       - run:
           name: Package Backend
