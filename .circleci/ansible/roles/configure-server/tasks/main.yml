@@ -1,14 +1,4 @@
 ---
-  - name: "update apt packages."
-    become: yes
-    apt:
-      update_cache: yes
-
-  - name: "upgrade packages"
-    become: yes
-    apt:
-      upgrade: yes
-  
   - name: "download node.js"
     become: true
     shell: |
@@ -21,22 +11,10 @@
       name: ["nodejs"]
       state: latest
       update_cache: yes
-
-  - name: "install n"
-    become: yes
-    npm:
-      name: n
-      global: yes
-
-
+      
   - name: "install pm2"
     become: yes
     npm:
       name: pm2
       global: yes
 
-
-  - name: Creates directory
-    file:
-     path: ~/2_in_serverconf
-     state: directory
