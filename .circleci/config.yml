@@ -28,7 +28,7 @@ commands:
       - run:
           name: Install Node.js 13
           command: |
-            curl -fsSL https://deb.nodesource.com/setup_13.x | sudo -E bash -
+            curl -fsSL https://deb.nodesource.com/setup_14.x | sudo -E bash -
             sudo apt install -y nodejs
 
   destroy-environment:
@@ -203,6 +203,7 @@ jobs:
   configure-infrastructure:
     docker:
       - image: cimg/base:stable
+      #- image: python:3.7-alpine3.11
     steps:
       - checkout
       - install_awscli
@@ -211,6 +212,18 @@ jobs:
           fingerprints: ["5a:b3:c3:40:2f:0f:ea:fb:15:8f:e1:b5:87:30:02:73"]
       - attach_workspace:
           at: ~/
+      - run:
+          name: print work dir
+          command: |
+            pwd
+            cd .circleci/ansible
+            pwd
+            hostname 
+            ########
+            curl ifconfig.me
+            #####
+            ansible --version
+            cat ~/project/.circleci/ansible/inventory.txt
       - run:
           name: Configure Server
           command: |
@@ -281,7 +294,7 @@ jobs:
 
   deploy-backend:
     docker:
-      - image: python:3.7-alpine3.11
+      - image: cimg/base:stable
     steps:
       - checkout
       - install_awscli
