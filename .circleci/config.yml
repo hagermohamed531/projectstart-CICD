@@ -23,10 +23,10 @@ commands:
             sudo apt install ansible -y
 
   install_nodejs:
-    description: Install Node.js 13
+    description: Install Node.js 14
     steps:
       - run:
-          name: Install Node.js 13
+          name: Install Node.js 14
           command: |
             curl -fsSL https://deb.nodesource.com/setup_14.x | sudo -E bash -
             sudo apt install -y nodejs
@@ -69,7 +69,7 @@ commands:
 jobs:
   build-frontend:
     docker:
-      - image: cimg/node:13.8.0
+      - image: cimg/node:14.8.0
     steps:
       - checkout
       - restore_cache:
@@ -86,7 +86,7 @@ jobs:
 
   build-backend:
     docker:
-      - image: cimg/node:13.8.0
+      - image: cimg/node:14.8.0
     steps:
       - checkout
       - restore_cache:
@@ -103,7 +103,7 @@ jobs:
 
   test-frontend:
     docker:
-      - image: cimg/node:13.8.0
+      - image: cimg/node:14.8.0
     steps:
       - checkout
       - restore_cache:
@@ -117,7 +117,7 @@ jobs:
 
   test-backend:
     docker:
-      - image: cimg/node:13.8.0
+      - image: cimg/node:14.8.0
     steps:
       - checkout
       - restore_cache:
@@ -131,7 +131,7 @@ jobs:
 
   scan-frontend:
     docker:
-      - image: cimg/node:13.8.0
+      - image: cimg/node:14.8.0
     steps:
       - checkout
       - restore_cache:
@@ -141,13 +141,14 @@ jobs:
           command: |
             cd frontend
             npm install
-            npm audit fix --force --audit-level=critical
-            npm audit fix --force --audit-level=critical
+            npm audit fix --audit-level=critical --force             
+            npm audit fix --audit-level=critical --force
+            npm audit --audit-level=critical
 
 
   scan-backend:
     docker:
-      - image: cimg/node:13.8.0
+      - image: cimg/node:14.8.0
     steps:
       - checkout
       - restore_cache:
@@ -157,8 +158,9 @@ jobs:
           command: |
             cd backend
             npm install
-            npm audit fix --force --audit-level=critical
-            npm audit fix --force --audit-level=critical
+            npm audit fix --audit-level=critical --force             
+            npm audit fix --audit-level=critical --force
+            npm audit --audit-level=critical
 
 
   deploy-infrastructure:
@@ -228,6 +230,7 @@ jobs:
           name: Configure Server
           command: |
             pwd
+            mkdir ~/1
             cd .circleci/ansible
             cat inventory.txt
             ansible-playbook -i inventory.txt configure-server.yml
@@ -235,7 +238,7 @@ jobs:
 
   run-migrations:
     docker:
-      - image: cimg/node:13.8.0
+      - image: cimg/node:14.8.0
     steps:
       - checkout
       - install_awscli
@@ -298,6 +301,7 @@ jobs:
       - checkout
       - install_awscli
       - install_ansible
+      - install_nodejs
       - add_ssh_keys:
           fingerprints: ["5a:b3:c3:40:2f:0f:ea:fb:15:8f:e1:b5:87:30:02:73"]
       - attach_workspace:
@@ -308,11 +312,12 @@ jobs:
           name: Install dependencies
           command: |
             cd backend
-
+            npm install
       - run:
           name: Package Backend
           command: |
             cd backend
+            npm run build
             cd ../
             tar -czf artifact.tar.gz backend
             cp artifact.tar.gz .circleci/ansible/roles/deploy/files
