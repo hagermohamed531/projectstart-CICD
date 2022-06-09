@@ -1,9 +1,8 @@
 ---
-  - name: "download node.js"
-    become: true
-    shell: |
-      curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
-
+- name: "Add Node.js from Nodesource"
+  become: true
+  shell: |
+    curl -sL https://deb.nodesource.com/setup_13.x | sudo -E bash -
 
   - name: "install nodejs"
     become: yes
